@@ -1,453 +1,351 @@
-<!DOCTYPE HTML>
-<!--
-	Highlights by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Highlights by HTML5 UP</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Singapore Income Tax & CPF Calculator</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px 30px 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        h1, h2 {
+            color: #2a6496; /* Blue from the CPF ceiling image */
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+        h1 {
+            font-size: 2em;
+            margin-top: 0;
+            color: #d9534f; /* Orange from first image */
+        }
+        h2 {
+            font-size: 1.5em;
+            margin-top: 40px;
+        }
+        .calculator-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 600px) {
+            .calculator-section {
+                grid-template-columns: 1fr;
+            }
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .rebate-group {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            grid-column: 1 / -1; /* Span full width */
+        }
+        .rebate-group input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.3);
+            cursor: pointer;
+        }
+        .rebate-group label {
+            margin-bottom: 0; cursor: pointer; font-weight: normal;
+        }
+        .results-section {
+            background-color: #eef7ff;
+            border: 1px solid #b3d7f7;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 25px;
+            display: none; /* Initially hidden */
+        }
+        .results-section h3 {
+            margin-top: 0;
+            color: #0056b3;
+            border-bottom: 1px solid #b3d7f7;
+            padding-bottom: 8px;
+        }
+        .results-section p {
+            margin: 10px 0;
+            font-size: 1.05em;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .results-section p span:last-child {
+            font-weight: bold;
+        }
+        .results-section .sub-detail {
+             font-size: 0.85em; color: #555; padding-left: 15px;
+        }
+        .total-tax {
+            font-size: 1.25em !important;
+            font-weight: bold;
+            margin-top: 15px !important;
+            padding-top: 15px;
+            border-top: 1px solid #b3d7f7;
+            color: #d9534f;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 0.95em;
+        }
+        th, td {
+            border-bottom: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            border-bottom-width: 2px;
+        }
+        thead.blue-header th {
+            background-color: #2a6496;
+            color: white;
+            text-align: left;
+        }
+        td:last-child { text-align: right; }
+        th:last-child { text-align: right; }
+        .footer-note {
+            font-style: italic; color: #555; margin-top: 20px;
+            padding-top: 15px; border-top: 1px solid #eee; font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
 
-		<!-- Header -->
-			<section id="header">
-				<header class="major">
-					<h1>Highlights</h1>
-					<p>A fun little { responsive } single pager by <a href="http://html5up.net">HTML5 UP</a></p>
-				</header>
-				<div class="container">
-					<ul class="actions special">
-						<li><a href="#one" class="button primary scrolly">Begin</a></li>
-					</ul>
-				</div>
-			</section>
+    <div class="container">
+        <h1>Comprehensive Income Tax Calculator</h1>
+        <p>Calculate your income tax by providing your income details. The calculator will automatically compute your CPF relief and show a breakdown of tax by income source.</p>
 
-		<!-- One -->
-			<section id="one" class="main special">
-				<div class="container">
-					<span class="image fit primary"><img src="images/pic01.jpg" alt="" /></span>
-					<div class="content">
-						<header class="major">
-							<h2>Who I am</h2>
-						</header>
-						<p>Aliquam ante ac id. Adipiscing interdum lorem praesent fusce pellentesque arcu feugiat. Consequat sed ultricies rutrum. Sed adipiscing eu amet interdum lorem blandit vis ac commodo aliquet integer vulputate phasellus lorem ipsum dolor lorem magna consequat sed etiam adipiscing interdum.</p>
-					</div>
-					<a href="#two" class="goto-next scrolly">Next</a>
-				</div>
-			</section>
+        <div class="main-calculator">
+            <h2>Your Income & Details</h2>
+            <div class="calculator-section">
+                <div class="input-group">
+                    <label for="incomeYear">Income Year</label>
+                    <select id="incomeYear">
+                        <option value="2024">2024 (for YA 2025)</option>
+                        <option value="2025">2025 (for YA 2026)</option>
+                        <option value="2026">2026 (for YA 2027)</option>
+                        <option value="2023">2023 (for YA 2024)</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="ageGroup">Your Age Group</label>
+                    <select id="ageGroup">
+                        <option value="0.20">55 and below (20%)</option>
+                        <option value="0.16">56 to 60 (16%)</option>
+                        <option value="0.105">61 to 65 (10.5%)</option>
+                        <option value="0.075">66 to 70 (7.5%)</option>
+                        <option value="0.05">Above 70 (5%)</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="monthlyOW">Monthly Ordinary Wage (OW)</label>
+                    <input type="number" id="monthlyOW" placeholder="e.g., 7000" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="annualAW">Annual Additional Wage (AW)</label>
+                    <input type="number" id="annualAW" placeholder="e.g., 10000" min="0">
+                </div>
+                 <div class="input-group" style="grid-column: 1 / -1;">
+                    <label for="otherIncome">Other Taxable Income (e.g. rental, freelance)</label>
+                    <input type="number" id="otherIncome" placeholder="e.g., 5000" min="0">
+                </div>
+                <div class="rebate-group">
+                    <input type="checkbox" id="applyRebate">
+                    <label for="applyRebate">Apply one-off tax rebate (50% of tax, capped at SGD 200 for YA 2025)</label>
+                </div>
+            </div>
 
-		<!-- Two -->
-			<section id="two" class="main special">
-				<div class="container">
-					<span class="image fit primary"><img src="images/pic02.jpg" alt="" /></span>
-					<div class="content">
-						<header class="major">
-							<h2>Stuff I do</h2>
-						</header>
-						<p>Consequat sed ultricies rutrum. Sed adipiscing eu amet interdum lorem blandit vis ac commodo aliquet vulputate.</p>
-						<ul class="icons-grid">
-							<li>
-								<span class="icon solid major fa-camera-retro"></span>
-								<h3>Magna Etiam</h3>
-							</li>
-							<li>
-								<span class="icon solid major fa-pencil-alt"></span>
-								<h3>Lorem Ipsum</h3>
-							</li>
-							<li>
-								<span class="icon solid major fa-code"></span>
-								<h3>Nulla Tempus</h3>
-							</li>
-							<li>
-								<span class="icon solid major fa-coffee"></span>
-								<h3>Sed Feugiat</h3>
-							</li>
-						</ul>
-					</div>
-					<a href="#three" class="goto-next scrolly">Next</a>
-				</div>
-			</section>
+            <div id="results" class="results-section">
+                <!-- Calculation results will be injected here by JS -->
+            </div>
+        </div>
 
-		<!-- Three -->
-			<section id="three" class="main special">
-				<div class="container">
-					<span class="image fit primary"><img src="images/pic03.jpg" alt="" /></span>
-					<div class="content">
-						<header class="major">
-							<h2>One more thing</h2>
-						</header>
-						<p>Aliquam ante ac id. Adipiscing interdum lorem praesent fusce pellentesque arcu feugiat. Consequat sed ultricies rutrum. Sed adipiscing eu amet interdum lorem blandit vis ac commodo aliquet integer vulputate phasellus lorem ipsum dolor lorem magna consequat sed etiam adipiscing interdum.</p>
-					</div>
-					<a href="#footer" class="goto-next scrolly">Next</a>
-				</div>
-			</section>
+        <div class="table-section">
+            <h2>Reference: CPF Ordinary Wage (OW) Ceiling</h2>
+             <table>
+                <thead class="blue-header">
+                    <tr>
+                        <th>Period</th>
+                        <th>CPF monthly salary ceiling</th>
+                    </tr>
+                </thead>
+                <tbody id="ow-ceiling-table">
+                    <!-- OW Ceiling table will be populated by JS -->
+                </tbody>
+            </table>
+            <div class="footer-note">
+                <p>Notwithstanding the increases to the CPF monthly salary ceiling, the CPF annual salary ceiling will remain at $102,000.</p>
+            </div>
+        </div>
+    </div>
 
-		<!-- Four -->
-		<!--
-			<section id="four" class="main">
-				<div class="container">
-					<div class="content">
-						<header class="major">
-							<h2>Elements</h2>
-						</header>
-						<section>
-							<h4>Text</h4>
-							<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
-							This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
-							This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
-							<hr />
-							<header>
-								<h4>Heading with a Subtitle</h4>
-								<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
-							</header>
-							<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
-							<header>
-								<h5>Heading with a Subtitle</h5>
-								<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
-							</header>
-							<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
-							<hr />
-							<h2>Heading Level 2</h2>
-							<h3>Heading Level 3</h3>
-							<h4>Heading Level 4</h4>
-							<h5>Heading Level 5</h5>
-							<h6>Heading Level 6</h6>
-							<hr />
-							<h5>Blockquote</h5>
-							<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
-							<h5>Preformatted</h5>
-							<pre><code>i = 0;
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- DATA ---
+        const taxBrackets = [
+            { over: 0, notOver: 20000, baseTax: 0, rate: 0.00 },
+            { over: 20000, notOver: 30000, baseTax: 0, rate: 0.02 },
+            { over: 30000, notOver: 40000, baseTax: 200, rate: 0.035 },
+            { over: 40000, notOver: 80000, baseTax: 550, rate: 0.07 },
+            { over: 80000, notOver: 120000, baseTax: 3350, rate: 0.115 },
+            { over: 120000, notOver: 160000, baseTax: 7950, rate: 0.15 },
+            { over: 160000, notOver: 200000, baseTax: 13950, rate: 0.18 },
+            { over: 20000, notOver: 240000, baseTax: 21150, rate: 0.19 },
+            { over: 240000, notOver: 280000, baseTax: 28750, rate: 0.195 },
+            { over: 280000, notOver: 320000, baseTax: 36550, rate: 0.20 },
+            { over: 320000, notOver: 500000, baseTax: 44550, rate: 0.22 },
+            { over: 500000, notOver: 1000000, baseTax: 84150, rate: 0.23 },
+            { over: 1000000, notOver: Infinity, baseTax: 199150, rate: 0.24 }
+        ];
+        const owCeilingsData = [
+            { period: "1 Jan 2023 to 31 Aug 2023", ceiling: 6000 },
+            { period: "1 Sep 2023 to 31 Dec 2023", ceiling: 6300 },
+            { period: "1 Jan to 31 Dec 2024", ceiling: 6800 },
+            { period: "1 Jan to 31 Dec 2025", ceiling: 7400 },
+            { period: "On or after 1 Jan 2026", ceiling: 8000 }
+        ];
+        const CPF_ANNUAL_LIMIT = 102000;
 
-while (!deck.isInOrder()) {
-  print 'Iteration ' + i;
-  deck.shuffle();
-  i++;
-}
+        const inputs = Array.from(document.querySelectorAll('.main-calculator input, .main-calculator select'));
+        const resultsDiv = document.getElementById('results');
 
-print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
-						</section>
+        populateOwCeilingTable();
+        inputs.forEach(input => input.addEventListener('input', calculateAndDisplay));
 
-						<section>
-							<h4>Lists</h4>
-							<div class="row">
-								<div class="col-6 col-12-medium">
-									<h5>Unordered</h5>
-									<ul>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
-									<h5>Alternate</h5>
-									<ul class="alt">
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
-								</div>
-								<div class="col-6 col-12-medium">
-									<h5>Ordered</h5>
-									<ol>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis viverra.</li>
-										<li>Felis enim feugiat.</li>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis lorem.</li>
-										<li>Felis enim et feugiat.</li>
-									</ol>
-									<h5>Icons</h5>
-									<ul class="icons">
-										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-									</ul>
-								</div>
-							</div>
-							<h5>Actions</h5>
-							<ul class="actions">
-								<li><a href="#" class="button primary">Default</a></li>
-								<li><a href="#" class="button">Default</a></li>
-							</ul>
-							<ul class="actions small">
-								<li><a href="#" class="button primary small">Small</a></li>
-								<li><a href="#" class="button small">Small</a></li>
-							</ul>
-							<div class="row">
-								<div class="col-6 col-12-small">
-									<ul class="actions stacked">
-										<li><a href="#" class="button primary">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-								</div>
-								<div class="col-6 col-12-small">
-									<ul class="actions stacked">
-										<li><a href="#" class="button primary small">Small</a></li>
-										<li><a href="#" class="button small">Small</a></li>
-									</ul>
-								</div>
-								<div class="col-6 col-12-small">
-									<ul class="actions stacked">
-										<li><a href="#" class="button primary fit">Default</a></li>
-										<li><a href="#" class="button fit">Default</a></li>
-									</ul>
-								</div>
-								<div class="col-6 col-12-small">
-									<ul class="actions stacked">
-										<li><a href="#" class="button primary small fit">Small</a></li>
-										<li><a href="#" class="button small fit">Small</a></li>
-									</ul>
-								</div>
-							</div>
-						</section>
+        function calculateProgressiveTax(income) {
+            if (income <= 0) return 0;
+            let bracket = taxBrackets.find(b => income > b.over && income <= b.notOver) || taxBrackets[taxBrackets.length - 1];
+            if (income <= taxBrackets[0].notOver) bracket = taxBrackets[0];
+            const taxOnExcess = (income - bracket.over) * bracket.rate;
+            return bracket.baseTax + taxOnExcess;
+        }
 
-						<section>
-							<h4>Table</h4>
-							<h5>Default</h5>
-							<div class="table-wrapper">
-								<table>
-									<thead>
-										<tr>
-											<th>Name</th>
-											<th>Description</th>
-											<th>Price</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Item One</td>
-											<td>Ante turpis integer aliquet porttitor.</td>
-											<td>29.99</td>
-										</tr>
-										<tr>
-											<td>Item Two</td>
-											<td>Vis ac commodo adipiscing arcu aliquet.</td>
-											<td>19.99</td>
-										</tr>
-										<tr>
-											<td>Item Three</td>
-											<td> Morbi faucibus arcu accumsan lorem.</td>
-											<td>29.99</td>
-										</tr>
-										<tr>
-											<td>Item Four</td>
-											<td>Vitae integer tempus condimentum.</td>
-											<td>19.99</td>
-										</tr>
-										<tr>
-											<td>Item Five</td>
-											<td>Ante turpis integer aliquet porttitor.</td>
-											<td>29.99</td>
-										</tr>
-									</tbody>
-									<tfoot>
-										<tr>
-											<td colspan="2"></td>
-											<td>100.00</td>
-										</tr>
-									</tfoot>
-								</table>
-							</div>
+        function calculateAndDisplay() {
+            const monthlyOW = parseFloat(document.getElementById('monthlyOW').value) || 0;
+            const annualAW = parseFloat(document.getElementById('annualAW').value) || 0;
+            const otherIncome = parseFloat(document.getElementById('otherIncome').value) || 0;
+            const incomeYear = document.getElementById('incomeYear').value;
+            const ageRate = parseFloat(document.getElementById('ageGroup').value);
+            const applyRebate = document.getElementById('applyRebate').checked;
 
-							<h5>Alternate</h5>
-							<div class="table-wrapper">
-								<table class="alt">
-									<thead>
-										<tr>
-											<th>Name</th>
-											<th>Description</th>
-											<th>Price</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Item One</td>
-											<td>Ante turpis integer aliquet porttitor.</td>
-											<td>29.99</td>
-										</tr>
-										<tr>
-											<td>Item Two</td>
-											<td>Vis ac commodo adipiscing arcu aliquet.</td>
-											<td>19.99</td>
-										</tr>
-										<tr>
-											<td>Item Three</td>
-											<td> Morbi faucibus arcu accumsan lorem.</td>
-											<td>29.99</td>
-										</tr>
-										<tr>
-											<td>Item Four</td>
-											<td>Vitae integer tempus condimentum.</td>
-											<td>19.99</td>
-										</tr>
-										<tr>
-											<td>Item Five</td>
-											<td>Ante turpis integer aliquet porttitor.</td>
-											<td>29.99</td>
-										</tr>
-									</tbody>
-									<tfoot>
-										<tr>
-											<td colspan="2"></td>
-											<td>100.00</td>
-										</tr>
-									</tfoot>
-								</table>
-							</div>
-						</section>
+            if (monthlyOW === 0 && annualAW === 0 && otherIncome === 0) {
+                 resultsDiv.style.display = 'none';
+                 return;
+            }
 
-						<section>
-							<h4>Buttons</h4>
-							<ul class="actions">
-								<li><a href="#" class="button primary">Primary</a></li>
-								<li><a href="#" class="button">Default</a></li>
-							</ul>
-							<ul class="actions">
-								<li><a href="#" class="button">Default</a></li>
-								<li><a href="#" class="button small">Small</a></li>
-							</ul>
-							<ul class="actions fit">
-								<li><a href="#" class="button primary fit">Fit</a></li>
-								<li><a href="#" class="button fit">Fit</a></li>
-							</ul>
-							<ul class="actions fit small">
-								<li><a href="#" class="button primary fit small">Fit + Small</a></li>
-								<li><a href="#" class="button fit small">Fit + Small</a></li>
-							</ul>
-							<ul class="actions">
-								<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
-								<li><a href="#" class="button icon solid fa-download">Icon</a></li>
-							</ul>
-							<ul class="actions">
-								<li><span class="button primary disabled">Disabled</span></li>
-								<li><span class="button disabled">Disabled</span></li>
-							</ul>
-						</section>
+            // 1. Calculate CPF Relief
+            let annualCpfSubjectOW = 0;
+            if (incomeYear === '2023') {
+                annualCpfSubjectOW = (Math.min(monthlyOW, 6000) * 8) + (Math.min(monthlyOW, 6300) * 4);
+            } else if (incomeYear === '2024') {
+                annualCpfSubjectOW = Math.min(monthlyOW, 6800) * 12;
+            } else if (incomeYear === '2025') {
+                annualCpfSubjectOW = Math.min(monthlyOW, 7400) * 12;
+            } else { // 2026 onwards
+                annualCpfSubjectOW = Math.min(monthlyOW, 8000) * 12;
+            }
+            const cpfSubjectAW = Math.min(annualAW, Math.max(0, CPF_ANNUAL_LIMIT - annualCpfSubjectOW));
+            const totalCpfSubjectWage = annualCpfSubjectOW + cpfSubjectAW;
+            const cpfRelief = totalCpfSubjectWage * ageRate;
 
-						<section>
-							<h4>Form</h4>
-							<form method="post" action="#">
-								<div class="row gtr-uniform">
-									<div class="col-6 col-12-xsmall">
-										<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
-									</div>
-									<div class="col-6 col-12-xsmall">
-										<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
-									</div>
-									<div class="col-12">
-										<select name="demo-category" id="demo-category">
-											<option value="">- Category -</option>
-											<option value="1">Manufacturing</option>
-											<option value="1">Shipping</option>
-											<option value="1">Administration</option>
-											<option value="1">Human Resources</option>
-										</select>
-									</div>
-									<div class="col-4 col-12-small">
-										<input type="radio" id="demo-priority-low" name="demo-priority" checked>
-										<label for="demo-priority-low">Low</label>
-									</div>
-									<div class="col-4 col-12-small">
-										<input type="radio" id="demo-priority-normal" name="demo-priority">
-										<label for="demo-priority-normal">Normal</label>
-									</div>
-									<div class="col-4 col-12-small">
-										<input type="radio" id="demo-priority-high" name="demo-priority">
-										<label for="demo-priority-high">High</label>
-									</div>
-									<div class="col-6 col-12-small">
-										<input type="checkbox" id="demo-copy" name="demo-copy">
-										<label for="demo-copy">Email me a copy</label>
-									</div>
-									<div class="col-6 col-12-small">
-										<input type="checkbox" id="demo-human" name="demo-human" checked>
-										<label for="demo-human">Not a robot</label>
-									</div>
-									<div class="col-12">
-										<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
-									</div>
-									<div class="col-12">
-										<ul class="actions">
-											<li><input type="submit" value="Send Message" class="primary" /></li>
-											<li><input type="reset" value="Reset" /></li>
-										</ul>
-									</div>
-								</div>
-							</form>
-						</section>
+            // 2. Calculate Taxable Incomes
+            const assessableMainIncome = (monthlyOW * 12) + annualAW;
+            const totalAssessableIncome = assessableMainIncome + otherIncome;
+            const taxableMainIncome = Math.max(0, assessableMainIncome - cpfRelief);
+            const totalTaxableIncome = taxableMainIncome + otherIncome;
+            
+            // 3. Calculate Tax Breakdown
+            const taxOnMain = calculateProgressiveTax(taxableMainIncome);
+            const totalTax = calculateProgressiveTax(totalTaxableIncome);
+            const taxOnOther = totalTax - taxOnMain;
+            
+            // 4. Apply Rebate
+            let rebateAmount = 0;
+            let finalTax = totalTax;
+            if (applyRebate) {
+                rebateAmount = Math.min(totalTax * 0.50, 200);
+                finalTax = totalTax - rebateAmount;
+            }
+            
+            displayResults({
+                totalAssessableIncome, cpfRelief, totalTaxableIncome, 
+                taxOnMain, taxOnOther, totalTax,
+                applyRebate, rebateAmount, finalTax
+            });
+        }
 
-						<section>
-							<h4>Image</h4>
-							<h5>Fit</h5>
-							<div class="box alt">
-								<div class="row gtr-uniform gtr-50">
-									<div class="col-12"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>
-									<div class="col-4"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>
-								</div>
-							</div>
-							<h5>Left &amp; Right</h5>
-							<p><span class="image left"><img src="images/pic05.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
-							<p><span class="image right"><img src="images/pic05.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
-						</section>
+        function displayResults(data) {
+            const formatCurrency = (num) => `SGD ${num.toLocaleString('en-SG', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-					</div>
-					<a href="#footer" class="goto-next scrolly">Next</a>
-				</div>
-			</section>
-		-->
+            let html = `<h3>Income Summary</h3>
+            <p><span>Total Assessable Income:</span> <span>${formatCurrency(data.totalAssessableIncome)}</span></p>
+            <p><span>(-) CPF Relief:</span> <span style="color: green;">${formatCurrency(data.cpfRelief)}</span></p>
+            <p style="border-top: 1px solid #ccc; padding-top: 10px;">
+                <strong><span>Total Taxable Income:</span> <span>${formatCurrency(data.totalTaxableIncome)}</span></strong></p>
+            
+            <h3 style="margin-top:20px;">Tax Payable Breakdown</h3>
+            <p><span>Tax from Main Income (OW/AW):</span> <span>${formatCurrency(data.taxOnMain)}</span></p>
+            <p><span>Tax from Other Income:</span> <span>${formatCurrency(data.taxOnOther)}</span></p>
+            
+            <p class="total-tax"><span>Total Tax Payable:</span> <span>${formatCurrency(data.totalTax)}</span></p>
+            `;
 
-		<!-- Footer -->
-			<section id="footer">
-				<div class="container">
-					<header class="major">
-						<h2>Get in touch</h2>
-					</header>
-					<form method="post" action="#">
-						<div class="row gtr-uniform">
-							<div class="col-6 col-12-xsmall"><input type="text" name="name" id="name" placeholder="Name" /></div>
-							<div class="col-6 col-12-xsmall"><input type="email" name="email" id="email" placeholder="Email" /></div>
-							<div class="col-12"><textarea name="message" id="message" placeholder="Message" rows="4"></textarea></div>
-							<div class="col-12">
-								<ul class="actions special">
-									<li><input type="submit" value="Send Message" class="primary" /></li>
-								</ul>
-							</div>
-						</div>
-					</form>
-				</div>
-				<footer>
-					<ul class="icons">
-						<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon brands alt fa-dribbble"><span class="label">Dribbble</span></a></li>
-						<li><a href="#" class="icon solid alt fa-envelope"><span class="label">Email</span></a></li>
-					</ul>
-					<ul class="copyright">
-						<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li><li>Demo Images: <a href="http://unsplash.com">Unsplash</a></li>
-					</ul>
-				</footer>
-			</section>
+            if (data.applyRebate) {
+                html += `
+                    <p style="margin-top: 15px;"><span>YA 2025 Rebate:</span> <span style="color: green;">- ${formatCurrency(data.rebateAmount)}</span></p>
+                    <p class="total-tax"><span>Final Tax after Rebate:</span> <span>${formatCurrency(data.finalTax)}</span></p>
+                `;
+            }
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+            resultsDiv.innerHTML = html;
+            resultsDiv.style.display = 'block';
+        }
 
-	</body>
+        function populateOwCeilingTable() {
+            const tableBody = document.getElementById('ow-ceiling-table');
+            let tableHTML = '';
+            owCeilingsData.forEach(item => {
+                tableHTML += `
+                    <tr>
+                        <td>${item.period}</td>
+                        <td>$${item.ceiling.toLocaleString('en-SG')}</td>
+                    </tr>`;
+            });
+            tableBody.innerHTML = tableHTML;
+        }
+    });
+    </script>
+
+</body>
 </html>
